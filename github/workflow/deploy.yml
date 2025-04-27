@@ -1,0 +1,28 @@
+name: Deploy Calculator App
+
+on:
+  push:
+    branches: [calculator]
+
+jobs:
+  deploy:
+    runs-on: self-hosted
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v2
+
+      - name: Build Docker image
+        run: docker build -t calculator-app .
+
+      - name: Stop and remove old container
+        run: |
+          docker stop calculator-container || true
+          docker rm calculator-container || true
+
+      - name: Run new container
+        run: |
+          docker run -d -p 80:5000 --name calculator-container calculator-app
