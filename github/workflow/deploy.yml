@@ -2,7 +2,7 @@ name: Deploy Calculator App
 
 on:
   push:
-    branches: [calculator]
+    branches: [main]
 
 jobs:
   deploy:
