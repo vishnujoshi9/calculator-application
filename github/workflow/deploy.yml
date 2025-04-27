@@ -16,13 +16,13 @@ jobs:
         uses: docker/setup-buildx-action@v2
 
       - name: Build Docker image
-        run: docker build -t calculator-app .
+        run: sudo docker build -t calculator-app .
 
       - name: Stop and remove old container
         run: |
-          docker stop calculator-container || true
-          docker rm calculator-container || true
+         sudo docker stop calculator-container || true
+         sudo docker rm calculator-container || true
 
       - name: Run new container
         run: |
-          docker run -d -p 80:5000 --name calculator-container calculator-app
+          sudo docker run -d -p 80:5000 --name calculator-container calculator-app
