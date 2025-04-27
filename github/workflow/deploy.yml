@@ -12,11 +12,10 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
-      - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v2
+      # Removed the Docker Buildx setup step as requested
 
       - name: Build Docker image
-        run: docker build -t calculator-app .
+        run: sudo docker build -t calculator-app .
 
       - name: Stop and remove old container
         run: |
